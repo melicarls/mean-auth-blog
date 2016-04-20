@@ -9,6 +9,6 @@ function LoginController ($location, UserService) {
       .then(function onSuccess(){
         vm.new_user = {}; // clear sign up form
         $location.path('/profile'); // redirect to '/profile'
-      })
+      });
   };
 }

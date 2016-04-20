@@ -79,6 +79,6 @@ module.exports = {
   index: index,
   create: create,
   show: show,
-  update: update, 
+  update: update,
   destroy: destroy
 };

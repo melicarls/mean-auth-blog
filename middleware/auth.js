@@ -21,7 +21,11 @@ function ensureAuthenticated(req, res, next) {
   if (payload.exp <= moment().unix()) {
     return res.status(401).send({ message: 'Token has expired.' });
   }
+  //Attaches the user's ID to all requests, so it is accessible in all user controllers on the server side
   req.user_id = payload.user_id;
+  //Next means it's all good, keep going. If you don't hit next, that means that the application stopped somewhere.
+  //Next moves on to the next function chained in the request:
+  // app.get('/api/me', auth.ensureAuthenticated, (NEXT) usersCtrl.showCurrentUser);
   next();
 }
 

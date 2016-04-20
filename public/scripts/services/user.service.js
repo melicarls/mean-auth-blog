@@ -6,7 +6,7 @@ function UserService($http, $q, $auth){
     user_id: null,
     displayName: null,
     email: null
-  }
+  };
 
   self.user = angular.extend({}, empty_user, {
     isLoggedIn: isLoggedIn
@@ -23,9 +23,9 @@ function UserService($http, $q, $auth){
   function setCurrentUser(){
     var user = $auth.getPayload();
     if (user) {
-      console.log("::: User is Logged In! :::", {user: user, token: $auth.getToken()})
+      console.log("::: User is Logged In! :::", {user: user, token: $auth.getToken()});
     } else {
-      console.log("::: No JWT found, user is not logged in. :::")
+      console.log("::: No JWT found, user is not logged in. :::");
     }
     return angular.extend(self.user, user || empty_user);
   }

@@ -53,6 +53,9 @@ function configRoutes($routeProvider, $locationProvider) {
       templateUrl: 'templates/posts/new.html',
       controller: 'PostsNewController',
       controllerAs: 'postsNewCtrl',
+      resolve: {
+        loginRequired: loginRequired
+      }
     })
     .when('/posts/:id', {
       templateUrl: 'templates/posts/show.html',
@@ -63,6 +66,9 @@ function configRoutes($routeProvider, $locationProvider) {
       templateUrl: 'templates/posts/edit.html',
       controller: 'PostsEditController',
       controllerAs: 'postsEditCtrl',
+      resolve: {
+        loginRequired: loginRequired
+      }
     })
     .otherwise({redirectTo: '/'});
 
