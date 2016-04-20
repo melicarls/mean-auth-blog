@@ -17,6 +17,13 @@ function PostsShowController ($location, $http, $routeParams) {
     function onShowSuccess(response) {
       console.log("Here's the post you're looking at", response);
       vm.post = response.data;
+
+      //Might want to break this out into a service (post.service) since it will probably be used elsewhere
+      vm.buttonShow = function (currentUser) {
+        console.log("Checking this user", currentUser, "against this post", vm.post);
+        return (vm.post.user._id === currentUser.user_id);
+      };
+
     }
 
     function onError(error) {

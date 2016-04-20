@@ -72,7 +72,6 @@ function configRoutes($routeProvider, $locationProvider) {
     })
     .otherwise({redirectTo: '/'});
 
-
     function skipIfLoggedIn($q, $auth) {
       return $auth.isAuthenticated();
     }
