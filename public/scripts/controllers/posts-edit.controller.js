@@ -4,10 +4,25 @@ function PostsEditController ($location, $http, $routeParams) {
   vm.post = {}; // form data
 
   vm.update = update;
+  vm.destroy = destroy;
 
   var postId = $routeParams.id;
 
   showPost(postId);
+
+  function destroy() {
+    $http({
+      method: 'DELETE',
+      url: '/api/posts/' + postId,
+    }).then(onDeleteSuccess, onError);
+    function onDeleteSuccess(response) {
+      console.log("Deleted!");
+      $location.path('/');
+    }
+    function onError(error) {
+      console.log("There was an error deleting the post", error);
+    }
+    }
 
   function update() {
     $http({

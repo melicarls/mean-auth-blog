@@ -1,6 +1,6 @@
 <div class="pull-right col-xl-4">
   <a class="btn btn-warning col-xl-2" href="/posts/{{postsEditCtrl.post._id}}">Discard Changes</a>
-  <a class="btn btn-danger col-xl-2">Delete Post</a>
+  <a class="btn btn-danger col-xl-2" ng-click="postsEditCtrl.destroy()">Delete Post</a>
   <hr>
 </div>
 <form ng-submit="postsEditCtrl.update()">
@@ -12,3 +12,6 @@
   </div>
   <input type="submit" value="Update Post" class="btn btn-block btn-info">
 </form>
+
+
+//When you create a post, the username isn't recorded
