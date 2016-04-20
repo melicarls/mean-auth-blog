@@ -15,4 +15,3 @@ angular
   .service('UserService', UserService)
   .config(configRoutes)
   ;
-
