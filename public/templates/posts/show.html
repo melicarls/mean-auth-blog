@@ -1,5 +1,6 @@
 <!-- PostsShowController as postsShowCtrl -->
 <h2>{{postsShowCtrl.post.title}}</h2>
 <p>{{postsShowCtrl.post.content}}</p>
+<p>-- {{postsShowCtrl.post.user.displayName}}</p>
 <a class="btn btn-primary" ng-href="/posts/{{postsShowCtrl.post._id}}/edit" ng-show="postsShowCtrl.buttonShow(main.currentUser)">Edit Post</a>
 <a class="btn btn-info" ng-href="/">Home</a>

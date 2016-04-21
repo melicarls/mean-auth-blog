@@ -13,5 +13,6 @@ angular
   .controller('LogoutController', LogoutController)
   .controller('ProfileController', ProfileController)
   .service('UserService', UserService)
+  .service('PostService', PostService)
   .config(configRoutes)
   ;

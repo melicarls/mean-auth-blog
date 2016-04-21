@@ -1,5 +1,5 @@
-PostsEditController.$inject = ["$location", "$http", "$routeParams"]; // minification protection
-function PostsEditController ($location, $http, $routeParams) {
+PostsEditController.$inject = ["$location", "$http", "$routeParams", "PostService"]; // minification protection
+function PostsEditController ($location, $http, $routeParams, PostService) {
   var vm = this;
   vm.post = {}; // form data
 
@@ -11,10 +11,7 @@ function PostsEditController ($location, $http, $routeParams) {
   showPost(postId);
 
   function destroy() {
-    $http({
-      method: 'DELETE',
-      url: '/api/posts/' + postId,
-    }).then(onDeleteSuccess, onError);
+    PostService.destroy(postId).then(onDeleteSuccess, onError);
     function onDeleteSuccess(response) {
       console.log("Deleted!");
       $location.path('/');
@@ -22,39 +19,33 @@ function PostsEditController ($location, $http, $routeParams) {
     function onError(error) {
       console.log("There was an error deleting the post", error);
     }
-    }
+  }
 
   function update() {
-    $http({
-      method: 'PUT',
-      url: '/api/posts/' + postId,
-      data: vm.post,
-    }).then(onEditSuccess, onError);
-
+    PostService.update(vm.post).then(onEditSuccess, onError);
     function onEditSuccess(response) {
       console.log("Got this back from the edit", response);
-      $location.path('/api/posts/' + response.data.id);
+      $location.path('/api/posts/' + response.id);
     }
-
     function onError(error) {
       console.log("There was an error editing the post", error);
     }
   }
 
   function showPost(id) {
-    console.log("Show post called from the edit screen");
-    $http({
-      method: 'GET',
-      url: '/api/posts/' + id
-    }).then(onShowSuccess, onError);
-
+    PostService.get(id).then(onShowSuccess, onError);
     function onShowSuccess(response) {
-      console.log("Here's the post you're looking at", response);
-      vm.post = response.data;
-    }
+      console.log("Here's the post you're looking at after the request", response);
+      vm.post = response;
 
+      //Might want to break this out into a service (post.service) since it will probably be used elsewhere
+      vm.buttonShow = function (currentUser) {
+        console.log("Checking this user", currentUser, "against this post", vm.post);
+        return (vm.post.user._id === currentUser.user_id);
+      };
+    }
     function onError(error) {
-      console.log("There was an error getting the post data", error);
+      console.log("There was an error", error);
       $location.path('/');
     }
   }
